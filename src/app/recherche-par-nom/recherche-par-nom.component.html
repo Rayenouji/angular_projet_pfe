@@ -1,0 +1,59 @@
+<div class="container">
+
+    <!--<form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2 mt-2 ">
+        <label class="text-primary">Nom Film en tapant</label>
+             <input #nom [(ngModel)]="searchTerm" name="searchTerm" class="form-control" >
+        </div>
+        </form>
+!-->
+        <form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2 mt-2 ">
+        <label>Nom film</label>
+        <input class="form-control" #searchTerm (keyup)="onKeyUp(searchTerm.value)">
+        </div>
+     </form> 
+
+
+
+    <!--  <form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2 mt-2 ">
+        <label>Nom Produit</label>
+        <input type="text" class="form-control" [(ngModel)]="nomProduit" name="nomProduit" class="form-control">
+        <button type="submit" (click)="rechercherProds()" class="btn btn-primary mb-2 ml-2">Rechercher</button>
+        </div>
+    </form> -->
+
+
+
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-striped" >
+                
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" >Id</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Date Création</th>
+                        <th scope="col">Director</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let produit of films  ">
+                    <tr>
+                        <td>{{produit.idFilm}}</td>
+                        <td>{{produit.nomFilm}}</td>
+                        <td>{{produit.genre}}</td>
+                        <td>{{produit.dateCreation | date:'dd/MM/yyyy'}}</td>
+                        <td>{{produit.director?.nomDir}}</td>
+                        <td><a *ngIf="authService.isAdmin()" class="btn btn-danger" (click)="supprimerFilm(produit)">Supprimer</a></td>
+                        <td><a *ngIf="authService.isAdmin()" class="btn btn-success" [routerLink]="['/updateFilm',produit.idFilm]">Modifier</a></td>
+                        
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
